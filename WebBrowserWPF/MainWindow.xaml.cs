@@ -24,5 +24,10 @@ namespace WebBrowserWPF
         {
             InitializeComponent();
         }
+
+        private void DefaultBrowser_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

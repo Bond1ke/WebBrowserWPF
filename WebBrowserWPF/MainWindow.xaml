@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1024" Background="#FF161616">
     <Grid>
-        <local:TabContent x:Name="DefaultBrowser" Url="https://www.google.com"/>
+        <local:TabContent x:Name="DefaultBrowser" Url="https://www.google.com" Loaded="DefaultBrowser_Loaded"/>
     </Grid>
 </Window>
