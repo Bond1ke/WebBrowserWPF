@@ -18,7 +18,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Panel.ZIndex="1024">
             <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button Style="{DynamicResource CaptionsBtn}" x:Name="MinimizeBtn" Width="32" Height="32" Background="Transparent" BorderBrush="Transparent" Padding="0">
                     <Viewbox Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -43,8 +43,14 @@
             </StackPanel>
         </Grid>
 
-        <TabControl x:Name="TabControl" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.RowSpan="2">
-            <TabItem>
+        <TabControl WindowChrome.IsHitTestVisibleInChrome="True" x:Name="TabControl" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.RowSpan="2">
+            <TabItem HeaderTemplate="{DynamicResource TabHeaderTemplate}">
+                <local:TabContent/>
+            </TabItem>
+            <TabItem HeaderTemplate="{DynamicResource TabHeaderTemplate}">
+                <local:TabContent/>
+            </TabItem>
+            <TabItem HeaderTemplate="{DynamicResource TabHeaderTemplate}">
                 <local:TabContent/>
             </TabItem>
         </TabControl>
