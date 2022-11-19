@@ -26,18 +26,18 @@
             <!--Left Column-->
             <Grid>
                 <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                            HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
 
-                    <Button Height="22" Width="25" Padding="0" Margin="0,0,5,0"
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
                     BorderBrush="Transparent" BorderThickness="0"
                             Background="Transparent">
-                        <Viewbox Width="20" Height="20">
+                        <Viewbox Width="20" Height="20" Margin="0,0,6,0">
                             <!-- <Image Source="Assets/Icons/Browser_Arrow_L_D_20.png"/> -->
                             <Path Data="{StaticResource BackBtnIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White"/>
                         </Viewbox>
                     </Button>
                     
-                    <Button Height="22" Width="25" Padding="0" Margin="0,0,5,0"
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
                     BorderBrush="Transparent" BorderThickness="0"
                             Background="Transparent">
                         <Viewbox Width="20" Height="20">
@@ -50,7 +50,7 @@
                 
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Button Height="22" Width="25" Padding="0" Margin="0,0,5,0"
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
                     BorderBrush="Transparent" BorderThickness="0"
                             Background="Transparent">
                         <Viewbox Width="20" Height="20">
@@ -59,11 +59,11 @@
                         </Viewbox>
                     </Button>
 
-                    <Button Height="22" Width="25" Padding="0" Margin="0,0,5,0"
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
                     BorderBrush="Transparent" BorderThickness="0"
                             Background="Transparent">
                         <Button.Content>
-                            <Viewbox Width="20" Height="20">
+                            <Viewbox Width="20" Height="20" Margin="0,0,1,0">
                                 <!-- <Image Source="Assets/Icons/Home.png"/> -->
                                 <Path Data="{StaticResource HomeIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White"/>
                             </Viewbox>
@@ -84,7 +84,7 @@
 
             <Button Width="20" Height="20" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,15,0"
                     Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                <Viewbox>
+                <Viewbox Margin="0,0,1,1">
                     <!--<Image Source="Assets/Icons/Search.png"/>-->
                     <Path Data="{StaticResource SearchIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White" Opacity="0.5"/>
                 </Viewbox>
@@ -103,7 +103,7 @@
                         Background="Transparent">
 
                     <Button.Content>
-                        <Viewbox Width="16" Height="16">
+                        <Viewbox Width="16" Height="16" Margin="0,0,1,0">
                             <!--<Image Source="Assets/Icons/Padlock.png"/>-->
                             <Path Data="{StaticResource PadlockIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White" Opacity="0.5"/>
                         </Viewbox>
@@ -111,7 +111,7 @@
                     
                 </Button>
 
-                <TextBlock Text="Безопасно" VerticalAlignment="Center" Foreground="#7FFFFFFF"/>
+                <TextBlock Text="Не безопасно" VerticalAlignment="Center" Foreground="#7FFFFFFF"/>
 
             </StackPanel>
 
@@ -120,18 +120,18 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left" VerticalAlignment="Center">
 
-                    <Button Height="22" Width="25" Padding="0" Margin="0,0,5,0"
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
                     BorderBrush="Transparent" BorderThickness="0"
                             Background="Transparent">
                         <Button.Content>
-                            <Viewbox Width="20" Height="20">
+                            <Viewbox Width="20" Height="20" Margin="0,0,1,0">
                                 <!-- <Image Source="Assets/Icons/Refresh.png"/> -->
                                 <Path Data="{StaticResource RefreshIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White"/>
                             </Viewbox>
                         </Button.Content>
                     </Button>
 
-                    <Button Height="22" Width="25" Padding="0" Margin="0,0,5,0"
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
                     BorderBrush="Transparent" BorderThickness="0"
                             Background="Transparent" Visibility="Collapsed">
                         <Button.Content>
@@ -146,11 +146,11 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right" VerticalAlignment="Center">
                     
-                    <Button Height="22" Width="25" Padding="0" Margin="0,0,5,0"
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
                     BorderBrush="Transparent" BorderThickness="0"
                             Background="Transparent">
                         <Button.Content>
-                            <Viewbox Width="20" Height="20">
+                            <Viewbox Width="20" Height="20" Margin="0,0,0,2">
                                 <!--<Image Source="Assets/Icons/Menu.png"/>-->
                                 <Path Data="{StaticResource MenuIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White"/>
                             </Viewbox>

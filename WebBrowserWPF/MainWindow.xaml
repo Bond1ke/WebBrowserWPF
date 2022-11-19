@@ -6,8 +6,47 @@
         xmlns:local="clr-namespace:WebBrowserWPF"
         xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1024" Background="#FF161616">
+        Title="MainWindow" Height="720" Width="1024" Background="#FF161616" MinWidth="500" MinHeight="500"
+        WindowStyle="None" AllowsTransparency="true" WindowStartupLocation="CenterScreen" StateChanged="Window_StateChanged">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="55"/>
+    </WindowChrome.WindowChrome>
     <Grid>
-        <local:TabContent x:Name="DefaultBrowser" Url="https://www.google.com" Loaded="DefaultBrowser_Loaded"/>
+        <!--<local:TabContent x:Name="DefaultBrowser" Url="https://www.google.com" Loaded="DefaultBrowser_Loaded"/>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Style="{DynamicResource CaptionsBtn}" x:Name="MinimizeBtn" Width="32" Height="32" Background="Transparent" BorderBrush="Transparent" Padding="0">
+                    <Viewbox Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!-- <Path Data="{StaticResource CloseIcon}" Fill="White"/> -->
+                        <Image Source="Assets/Icons/MinimizeContrast10.png"/>
+                    </Viewbox>
+                </Button>
+
+                <Button Style="{DynamicResource CaptionsBtn}" x:Name="MaximizeBtn" Width="32" Height="32" Background="Transparent" BorderBrush="Transparent" Padding="0">
+                    <Viewbox Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!-- <Path Data="{StaticResource CloseIcon}" Fill="White"/> -->
+                        <Image Source="Assets/Icons/MaximizeContrast10_2.png"/>
+                    </Viewbox>
+                </Button>
+
+                <Button Style="{DynamicResource CloseBtnStyle}" x:Name="CloseBtn"  Width="32" Height="32" Background="Transparent" BorderBrush="Transparent" Padding="0">
+                    <Viewbox Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!-- <Path Data="{StaticResource CloseIcon}" Fill="White"/> -->
+                        <Image Source="Assets/Icons/Close10.png"/>
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <TabControl x:Name="TabControl" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.RowSpan="2">
+            <TabItem>
+                <local:TabContent/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
