@@ -9,7 +9,7 @@
                 <ResourceDictionary Source="Templates/DataTemplates.xaml"/>
                 <ResourceDictionary Source="Assets/Icons/SVG/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            
+
             <!--Colours-->
             <SolidColorBrush x:Key="AppBackground" Color="#FF151515" />
             <SolidColorBrush x:Key="ElementBackground" Color="#FF201F21" />

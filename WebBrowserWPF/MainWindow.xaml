@@ -12,7 +12,9 @@
         <WindowChrome CaptionHeight="35"/>
     </WindowChrome.WindowChrome>
     <Grid>
+        
         <!--<local:TabContent x:Name="DefaultBrowser" Url="https://www.google.com" Loaded="DefaultBrowser_Loaded"/>-->
+
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition/>
@@ -43,14 +45,38 @@
             </StackPanel>
         </Grid>
 
-        <TabControl WindowChrome.IsHitTestVisibleInChrome="True" x:Name="TabsController" Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.RowSpan="2">
-            <TabItem HeaderTemplate="{DynamicResource TabHeaderTemplate}">
-                <local:TabContent/>
-            </TabItem>
-            <TabItem HeaderTemplate="{DynamicResource TabHeaderTemplate}">
-                <local:TabContent/>
-            </TabItem>
+        <TabControl WindowChrome.IsHitTestVisibleInChrome="True" x:Name="tabDynamic" ItemsSource="{Binding}"
+                    Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.RowSpan="2"
+                    SelectionChanged="tabDynamic_SelectionChanged">
+            <TabControl.Resources>
+                <DataTemplate x:Key="TabHeader" DataType="TabItem">
+                    <Grid Height="32" Width="100">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="18"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <!-- <TextBlock Text="Document" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" FontSize="14" /> -->
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=
+                         {x:Type TabItem}}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" FontSize="14"/>
+                        <Button Grid.Column="2" Padding="0" Width="16" Height="16" Name="btnDelete"
+                                Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Click="btnDelete_Click"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                CommandParameter="{Binding RelativeSource=
+                               {RelativeSource AncestorType={x:Type TabItem}}, Path=Name}">
+                            <Button.Content>
+                                <Viewbox Width="10" Height="10" Margin="0,0,1,0">
+                                    <!-- <Image Source="Assets/Icons/Home.png"/> -->
+                                    <Path Data="{StaticResource CloseIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White"/>
+                                </Viewbox>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+                
+            </TabControl.Resources>
         </TabControl>
-        
     </Grid>
 </Window>

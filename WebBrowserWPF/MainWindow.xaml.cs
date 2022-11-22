@@ -23,10 +23,8 @@ namespace WebBrowserWPF
     
     public partial class MainWindow : Window
     {
-        //a list of websites visited, since the browser was opened
-        public List<string> WebPages;
-        //index of the webpage which is loaded in the browser right now
-        int Current = 0;
+        private List<TabItem> _tabItems; //is a list of TabItem to hold the tabs
+        private TabItem _tabAdd; //a reference to the last TabItem that is used to add new tab dynamically
         private static IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             switch (msg)
@@ -139,7 +137,6 @@ namespace WebBrowserWPF
 
         [DllImport("User32")]
         internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
-
         public MainWindow()
         {
             InitializeComponent();
@@ -162,8 +159,110 @@ namespace WebBrowserWPF
 
             DwmSetWindowAttribute(hWnd, attribute, ref preference, sizeof(uint));
             
-            TabItem tabex = new TabItem();
-            TabsController.DataContext = tabex;
+/*            TabItem tabex = new TabItem();
+            TabsController.DataContext = tabex;*/
+
+            // initialize tabItem array
+            _tabItems = new List<TabItem>();
+
+            // add a tabItem with + in header 
+            _tabAdd = new TabItem();
+            //TabContent tabContent = new TabContent();
+            //_tabAdd.Content = tabContent;
+            _tabAdd.Header = "+";
+
+            _tabItems.Add(_tabAdd);
+
+            // add first tab
+            this.AddTabItem();
+
+            // bind tab control
+            tabDynamic.DataContext = _tabItems;
+
+            tabDynamic.SelectedIndex = 0;
+
+        }
+
+        private TabItem AddTabItem()
+        {
+            int count = _tabItems.Count;
+
+            // create new tab item
+            TabItem tab = new TabItem();
+            tab.Header = string.Format("Tab {0}", count);
+            tab.Name = string.Format("tab{0}", count);
+            tab.HeaderTemplate = tabDynamic.FindResource("TabHeader") as DataTemplate;
+
+            // add controls to tab item, this case I added just a text box
+            TextBox txt = new TextBox();
+            txt.Name = "txt";
+            TabContent tabContent = new TabContent();
+            tab.Content = tabContent;
+
+            // insert tab item right before the last (+) tab item
+            _tabItems.Insert(count - 1, tab);
+            return tab;
+        }
+
+        private void tabDynamic_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabItem tab = tabDynamic.SelectedItem as TabItem;
+            if (tab == null) return;
+
+            if (tab.Equals(_tabAdd))
+            {
+                // clear tab control binding
+                tabDynamic.DataContext = null;
+
+                TabItem newTab = this.AddTabItem();
+
+                // bind tab control
+                tabDynamic.DataContext = _tabItems;
+
+                // select newly added tab item
+                tabDynamic.SelectedItem = newTab;
+            }
+            else
+            {
+                // your code here...
+            }
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            string tabName = (sender as Button).CommandParameter.ToString();
+
+            var item = tabDynamic.Items.Cast<TabItem>().Where(i => i.Name.Equals(tabName)).SingleOrDefault();
+
+            TabItem tab = item as TabItem;
+
+            if (tab != null)
+            {
+                if (_tabItems.Count < 1)
+                {
+                    MessageBox.Show("Cannot remove last tab.");
+                }
+                else
+                {
+                    // get selected tab
+                    TabItem selectedTab = tabDynamic.SelectedItem as TabItem;
+
+                    // clear tab control binding
+                    tabDynamic.DataContext = null;
+
+                    _tabItems.Remove(tab);
+
+                    // bind tab control
+                    tabDynamic.DataContext = _tabItems;
+
+                    // select previously selected tab. if that is removed then select first tab
+                    if (selectedTab == null || selectedTab.Equals(tab))
+                    {
+                        selectedTab = _tabItems[0];
+                    }
+                    tabDynamic.SelectedItem = selectedTab;
+                }
+            }
         }
 
         [DllImport("dwmapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
