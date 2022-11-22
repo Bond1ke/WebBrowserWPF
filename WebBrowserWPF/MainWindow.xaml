@@ -9,16 +9,16 @@
         Title="MainWindow" Height="720" Width="1024" Background="#FF161616" MinWidth="500" MinHeight="500"
         WindowStyle="None" AllowsTransparency="true" WindowStartupLocation="CenterScreen" StateChanged="Window_StateChanged">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="55"/>
+        <WindowChrome CaptionHeight="35"/>
     </WindowChrome.WindowChrome>
     <Grid>
         <!--<local:TabContent x:Name="DefaultBrowser" Url="https://www.google.com" Loaded="DefaultBrowser_Loaded"/>-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="35"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Panel.ZIndex="1024">
+        <Grid Panel.ZIndex="1024" Grid.Row="0">
             <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button Style="{DynamicResource CaptionsBtn}" x:Name="MinimizeBtn" Width="32" Height="32" Background="Transparent" BorderBrush="Transparent" Padding="0">
                     <Viewbox Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -36,17 +36,14 @@
 
                 <Button Style="{DynamicResource CloseBtnStyle}" x:Name="CloseBtn"  Width="32" Height="32" Background="Transparent" BorderBrush="Transparent" Padding="0">
                     <Viewbox Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <!-- <Path Data="{StaticResource CloseIcon}" Fill="White"/> -->
-                        <Image Source="Assets/Icons/Close10.png"/>
+                        <Path Data="{StaticResource CloseIcon}" Fill="White"/>
+                        <!-- <Image Source="Assets/Icons/Close10.png"/> -->
                     </Viewbox>
                 </Button>
             </StackPanel>
         </Grid>
 
-        <TabControl WindowChrome.IsHitTestVisibleInChrome="True" x:Name="TabControl" Background="Transparent" BorderThickness="0" Grid.Row="0" Grid.RowSpan="2">
-            <TabItem HeaderTemplate="{DynamicResource TabHeaderTemplate}">
-                <local:TabContent/>
-            </TabItem>
+        <TabControl WindowChrome.IsHitTestVisibleInChrome="True" x:Name="TabsController" Background="Transparent" BorderThickness="0" Grid.Row="1" Grid.RowSpan="2">
             <TabItem HeaderTemplate="{DynamicResource TabHeaderTemplate}">
                 <local:TabContent/>
             </TabItem>
@@ -54,5 +51,6 @@
                 <local:TabContent/>
             </TabItem>
         </TabControl>
+        
     </Grid>
 </Window>

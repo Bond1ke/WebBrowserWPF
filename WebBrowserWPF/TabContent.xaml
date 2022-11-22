@@ -28,8 +28,8 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
 
-                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
-                    BorderBrush="Transparent" BorderThickness="0"
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0" x:Name="GoBackButton"
+                    BorderBrush="Transparent" BorderThickness="0" Click="GoBackButtonClick"
                             Background="Transparent">
                         <Viewbox Width="20" Height="20" Margin="0,0,6,0">
                             <!-- <Image Source="Assets/Icons/Browser_Arrow_L_D_20.png"/> -->
@@ -37,8 +37,8 @@
                         </Viewbox>
                     </Button>
                     
-                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
-                    BorderBrush="Transparent" BorderThickness="0"
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0" x:Name="GoForwardButton"
+                    BorderBrush="Transparent" BorderThickness="0" Click="GoForwardButtonClick"
                             Background="Transparent">
                         <Viewbox Width="20" Height="20">
                             <!-- <Image Source="Assets/Icons/Browser_Arrow_R_D_20.png"/> -->
@@ -59,8 +59,8 @@
                         </Viewbox>
                     </Button>
 
-                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
-                    BorderBrush="Transparent" BorderThickness="0"
+                    <Button x:Name="HomeButton" Height="35" Width="35" Padding="0" Margin="0,0,5,0"
+                    BorderBrush="Transparent" BorderThickness="0" Click="HomeButtonClick"
                             Background="Transparent">
                         <Button.Content>
                             <Viewbox Width="20" Height="20" Margin="0,0,1,0">
@@ -73,17 +73,14 @@
             </Grid>
 
             <!--Centre Column-->
-
-
-
-
             <TextBox Grid.Column="1" 
                      Margin="5,12" Padding="125 0 32 0" Background="#FF201F21" BorderBrush="#FF2F2F2F"
-                     VerticalContentAlignment="Center" Foreground="#7FFFFFFF">
+                     VerticalContentAlignment="Center" Foreground="#7FFFFFFF" x:Name="SearchTextBox" Keyboard.KeyDown="SearchTextBox_KeyDown">
+                
             </TextBox>
 
-            <Button Width="20" Height="20" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,15,0"
-                    Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+            <Button Width="20" Height="20" HorizontalAlignment="Right" Grid.Column="1" Margin="0,0,15,0" Click="SearchButtonClick"
+                    Background="Transparent" BorderBrush="Transparent" BorderThickness="0" x:Name="SearchButton">
                 <Viewbox Margin="0,0,1,1">
                     <!--<Image Source="Assets/Icons/Search.png"/>-->
                     <Path Data="{StaticResource SearchIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White" Opacity="0.5"/>
@@ -111,7 +108,7 @@
                     
                 </Button>
 
-                <TextBlock Text="Не безопасно" VerticalAlignment="Center" Foreground="#7FFFFFFF"/>
+                <TextBlock Text="Безопасно" VerticalAlignment="Center" Foreground="#7FFFFFFF"/>
 
             </StackPanel>
 
@@ -121,7 +118,7 @@
                             HorizontalAlignment="Left" VerticalAlignment="Center">
 
                     <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
-                    BorderBrush="Transparent" BorderThickness="0"
+                    BorderBrush="Transparent" BorderThickness="0" Click="ReloadButtonClick"
                             Background="Transparent">
                         <Button.Content>
                             <Viewbox Width="20" Height="20" Margin="0,0,1,0">
@@ -161,6 +158,9 @@
             </Grid>
 
         </Grid>
-        <cef:ChromiumWebBrowser x:Name="Browser" Grid.Row="1" Address="https://www.bing.com" Initialized="Browser_Initialized"/>
+
+        <cef:ChromiumWebBrowser x:Name="Browser" Grid.Row="1" Initialized="Browser_Initialized"
+                                FrameLoadEnd="ChromiumWebBrowser_OnFrameLoadEnd"/>
+        <!--AddressChanged="Browser_AddressChanged"-->
     </Grid>
 </UserControl>

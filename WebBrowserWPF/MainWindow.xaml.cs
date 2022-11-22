@@ -20,8 +20,13 @@ namespace WebBrowserWPF
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+    
     public partial class MainWindow : Window
     {
+        //a list of websites visited, since the browser was opened
+        public List<string> WebPages;
+        //index of the webpage which is loaded in the browser right now
+        int Current = 0;
         private static IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             switch (msg)
@@ -138,6 +143,7 @@ namespace WebBrowserWPF
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
 
             SourceInitialized += (s, e) =>
             {
@@ -155,6 +161,9 @@ namespace WebBrowserWPF
             var preference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND;
 
             DwmSetWindowAttribute(hWnd, attribute, ref preference, sizeof(uint));
+            
+            TabItem tabex = new TabItem();
+            TabsController.DataContext = tabex;
         }
 
         [DllImport("dwmapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -162,9 +171,6 @@ namespace WebBrowserWPF
                                                      DWMWINDOWATTRIBUTE attribute,
                                                      ref DWM_WINDOW_CORNER_PREFERENCE pvAttribute,
                                                      uint cbAttribute);
-
-
-
         public enum DWMWINDOWATTRIBUTE
         {
             DWMWA_WINDOW_CORNER_PREFERENCE = 33
