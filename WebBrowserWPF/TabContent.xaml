@@ -143,15 +143,18 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right" VerticalAlignment="Center">
                     
-                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0"
-                    BorderBrush="Transparent" BorderThickness="0"
-                            Background="Transparent">
+                    <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0" MouseRightButtonUp="Burger_MouseRightButtonUp"
+                    BorderBrush="Transparent" BorderThickness="0" Click="BurgerClicked"
+                            Background="Transparent" x:Name="BurgerButton">
                         <Button.Content>
                             <Viewbox Width="20" Height="20" Margin="0,0,0,2">
                                 <!--<Image Source="Assets/Icons/Menu.png"/>-->
                                 <Path Data="{StaticResource MenuIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White"/>
                             </Viewbox>
                         </Button.Content>
+                        <Button.ContextMenu>
+                            <ContextMenu x:Name="Menu" ></ContextMenu>
+                        </Button.ContextMenu>
                     </Button>
 
                 </StackPanel>
@@ -160,7 +163,8 @@
         </Grid>
 
         <cef:ChromiumWebBrowser x:Name="Browser" Grid.Row="1" Initialized="Browser_Initialized"
-                                FrameLoadEnd="ChromiumWebBrowser_OnFrameLoadEnd"/>
+                                 AddressChanged="Browser_AddressChanged"/>
         <!--AddressChanged="Browser_AddressChanged"-->
+        <!--FrameLoadEnd="ChromiumWebBrowser_OnFrameLoadEnd"-->
     </Grid>
 </UserControl>
