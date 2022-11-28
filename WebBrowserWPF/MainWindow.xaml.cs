@@ -178,7 +178,7 @@ namespace WebBrowserWPF
             this.AddTabItem();
 
             // bind tab control
-            tabDynamic.DataContext = _tabItems;
+            tabDynamic.DataContext = CorrectTabHeaders(_tabItems);
 
             tabDynamic.SelectedIndex = 0;
 
@@ -218,7 +218,7 @@ namespace WebBrowserWPF
                 TabItem newTab = this.AddTabItem();
 
                 // bind tab control
-                tabDynamic.DataContext = _tabItems;
+                tabDynamic.DataContext = CorrectTabHeaders(_tabItems);
 
                 // select newly added tab item
                 tabDynamic.SelectedItem = newTab;
@@ -254,7 +254,7 @@ namespace WebBrowserWPF
                     _tabItems.Remove(tab);
 
                     // bind tab control
-                    tabDynamic.DataContext = _tabItems;
+                    tabDynamic.DataContext = CorrectTabHeaders(_tabItems);
 
                     // select previously selected tab. if that is removed then select first tab
                     if (selectedTab == null || selectedTab.Equals(tab))
@@ -308,6 +308,18 @@ namespace WebBrowserWPF
         private void DefaultBrowser_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+        private List<TabItem> CorrectTabHeaders(List<TabItem> tabItemList)
+        {
+            for (int i = 0; i < tabItemList.Count - 1; i++)
+            {
+                if (!tabItemList[i].Header.ToString().ToCharArray().Last().Equals(i + 1))
+                {
+                    tabItemList[i].Header = "Tab " + (i + 1);
+                }
+            }
+
+            return tabItemList;
         }
     }
 }

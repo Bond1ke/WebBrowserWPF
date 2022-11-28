@@ -24,10 +24,24 @@ namespace WebBrowserWPF
         public static List<string> WebPages = new List<string>();
         public static int Current = 0;
         public static ContextMenu contextmenu = new ContextMenu();
+/*        MenuItem historyButton = new MenuItem();
+
+        MenuItem bookmarkButton = new MenuItem();*/
         //public static 
         public TabContent()
         {
             InitializeComponent();
+
+/*            historyButton.Click += HistoryClicked;
+            historyButton.Header = "History";
+            Menu.Items.Add(historyButton);
+
+            bookmarkButton.Click += BookmarksClicked;
+            bookmarkButton.Header = "Bookmarks";
+            Menu.Items.Add(bookmarkButton);*/
+        }
+        static TabContent()
+        {
         }
         public string Url
         {
@@ -43,9 +57,13 @@ namespace WebBrowserWPF
         }
         private void HomeButtonClick(object sender, RoutedEventArgs e)
         {
-            
+
             Url = "https://www.google.com/";
             Browser.Load(Url);
+        }
+        private void BookmarkButtonClicked(object sender, RoutedEventArgs e)
+        {
+            //BookmarkButton.Content = FindResource("Warning");
         }
         private void SearchButtonClick(object sender, RoutedEventArgs e)
         {
@@ -85,22 +103,7 @@ namespace WebBrowserWPF
         private void ReloadButtonClick(object sender, RoutedEventArgs e)
         {
             Browser.Reload();
-        }    
-/*        private void ChromiumWebBrowser_OnFrameLoadEnd(object sender, FrameLoadEndEventArgs e)
-        {
-            Dispatcher.BeginInvoke((Action)(() =>
-            {
-                Url = e.Url;
-            //check whether a string is a valid HTTP URL
-            if (Uri.IsWellFormedUriString(Url, UriKind.Absolute))
-                {
-                    SearchTextBox.Text = Browser.Address;
-                    //WebPages.Add(Browser.Address); Current++;
-                   if (Browser.IsLoaded)
-                    AddWebPage(Browser.Address);
-                }
-            }));
-        }*/
+        }
         private void Browser_AddressChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             Url = e.NewValue.ToString();
@@ -112,18 +115,34 @@ namespace WebBrowserWPF
             item.Click += MenuClicked;
             item.Header = Url;
             item.Width = 300;
-            item.Background = Brushes.Transparent;
             item.FontSize = 15;
-            item.Foreground = Brushes.White;
-            
             item.Icon = WebPages.Count;
-
+            //item.Background = Brushes.Transparent;
+            //item.Foreground = Brushes.White;
             //item.Template = FindResource("ItemTemplate") as ControlTemplate;
 
             //Menu.Items.Add(item);
-            BurgerButton.ContextMenu = contextmenu;
-            BurgerButton.ContextMenu = contextmenu;
             contextmenu.Items.Add(item);
+            BurgerButton.ContextMenu = contextmenu;
+            //historyButton.Items.Add(item);
+            //historyButton.Items.Clear();
+            /*int count = 0;
+            while(count < Current)
+            {
+                MenuItem item1 = new MenuItem();
+                item1.Click += MenuClicked;
+                item1.Header = Url;
+                item1.Width = 300;
+                item1.FontSize = 15;
+                item1.Icon = WebPages.Count;
+                historyButton.Items.Add(item1);
+                count++;
+            }*/
+
+            /*historyButton.Click += HistoryClicked;
+            historyButton.Header = "History";*/
+            //Menu.Items.Add(historyButton);
+            //Menu.Items.SortDescriptions.Clear();
         }
         private void MenuClicked(object sender, RoutedEventArgs e)
         {
@@ -134,21 +153,60 @@ namespace WebBrowserWPF
         }
         private void BurgerClicked(object sender, RoutedEventArgs e)
         {
+            /*Menu.PlacementTarget = BurgerButton;
+            Menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            Menu.HorizontalOffset = 0;
+            Menu.IsOpen = true;*/
+
+            contextmenu.PlacementTarget = BurgerButton;
+            contextmenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+
+            contextmenu.HorizontalOffset = 0;
+            contextmenu.VerticalOffset = 0;
+            contextmenu.Height = 150;
+            contextmenu.Width = 250;
+            contextmenu.IsOpen = true;
+        }
+        private void HistoryClicked(object sender, RoutedEventArgs e)
+        {
+            /*if (WebPages.Count != 0)
+            {
+
+                Menu.PlacementTarget = BurgerButton;
+                Menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+                Menu.HorizontalOffset = 0;
+                Menu.IsOpen = true;
+            }*/
+            MenuItem item = (MenuItem)sender;
+            Browser.Load(item.Header.ToString());
+        }
+        private void BookmarksClicked(object sender, RoutedEventArgs e)
+        {
+            /*            if (WebPages.Count != 0)
+                        {
+                            Menu.PlacementTarget = BurgerButton;
+                            Menu.Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom;
+                            Menu.HorizontalOffset = 0;
+                            Menu.IsOpen = true;
+                        }
             if (WebPages.Count != 0)
             {
-                contextmenu.Background = Brushes.Black;
+                //contextmenu.Background = Brushes.Black;
                 //ScrollViewer scroll = new ScrollViewer();
-                
+
                 contextmenu.PlacementTarget = BurgerButton;
-                contextmenu.Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom;
-               
+                contextmenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+
                 contextmenu.HorizontalOffset = 0;
                 contextmenu.VerticalOffset = 0;
                 contextmenu.Height = 150;
                 contextmenu.Width = 250;
                 contextmenu.IsOpen = true;
-                
+
             }
+             
+             */
+
         }
         private void Burger_MouseRightButtonUp(object sender, RoutedEventArgs e)
         {

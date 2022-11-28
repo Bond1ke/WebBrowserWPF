@@ -146,17 +146,26 @@
                     <Button Height="35" Width="35" Padding="0" Margin="0,0,5,0" MouseRightButtonUp="Burger_MouseRightButtonUp"
                     BorderBrush="Transparent" BorderThickness="0" Click="BurgerClicked"
                             Background="Transparent" x:Name="BurgerButton">
+                        <!--Click="BurgerClicked"-->
+                        <!--MouseRightButtonUp="Burger_MouseRightButtonUp"-->
                         <Button.Content>
                             <Viewbox Width="20" Height="20" Margin="0,0,0,2">
                                 <!--<Image Source="Assets/Icons/Menu.png"/>-->
                                 <Path Data="{StaticResource MenuIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White"/>
                             </Viewbox>
                         </Button.Content>
-                        <!--
+                        
                         <Button.ContextMenu>
-                            <ContextMenu x:Name="Menu"></ContextMenu>
+                            <ContextMenu x:Name="Menu">
+                                <!--
+                                <MenuItem Header="History" Click="HistoryClicked"/>
+                                <MenuItem Header="Bookmarks" Click="BookmarksClicked"/>
+                                -->
+                            </ContextMenu>
+                            <!-- <ContextMenu x:Name="Menu" ></ContextMenu> -->
+                            
                         </Button.ContextMenu>
-                        -->
+                        
                     </Button>
 
                 </StackPanel>
