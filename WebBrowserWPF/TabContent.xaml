@@ -152,9 +152,11 @@
                                 <Path Data="{StaticResource MenuIcon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="White"/>
                             </Viewbox>
                         </Button.Content>
+                        <!--
                         <Button.ContextMenu>
-                            <ContextMenu x:Name="Menu" ></ContextMenu>
+                            <ContextMenu x:Name="Menu"></ContextMenu>
                         </Button.ContextMenu>
+                        -->
                     </Button>
 
                 </StackPanel>

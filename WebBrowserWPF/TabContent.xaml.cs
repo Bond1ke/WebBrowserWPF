@@ -23,6 +23,7 @@ namespace WebBrowserWPF
     {
         public static List<string> WebPages = new List<string>();
         public static int Current = 0;
+        public static ContextMenu contextmenu = new ContextMenu();
         //public static 
         public TabContent()
         {
@@ -110,25 +111,43 @@ namespace WebBrowserWPF
             MenuItem item = new MenuItem();
             item.Click += MenuClicked;
             item.Header = Url;
-            item.Width = 384;
+            item.Width = 300;
+            item.Background = Brushes.Transparent;
+            item.FontSize = 15;
+            item.Foreground = Brushes.White;
+            
+            item.Icon = WebPages.Count;
 
-            //BurgerButton.ContextMenu.Name = "Menu";
+            //item.Template = FindResource("ItemTemplate") as ControlTemplate;
 
-            Menu.Items.Add(item);
+            //Menu.Items.Add(item);
+            BurgerButton.ContextMenu = contextmenu;
+            BurgerButton.ContextMenu = contextmenu;
+            contextmenu.Items.Add(item);
         }
         private void MenuClicked(object sender, RoutedEventArgs e)
         {
+            //load page from browsing history
             MenuItem item = (MenuItem)sender;
-            Browser.Load(item.Header.ToString());
+            //Browser.Load(item.Header.ToString());
+            Clipboard.SetText(item.Header.ToString());
         }
         private void BurgerClicked(object sender, RoutedEventArgs e)
         {
             if (WebPages.Count != 0)
             {
-                Menu.PlacementTarget = BurgerButton;
-                Menu.Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom;
-                Menu.HorizontalOffset = 0;
-                Menu.IsOpen = true;
+                contextmenu.Background = Brushes.Black;
+                //ScrollViewer scroll = new ScrollViewer();
+                
+                contextmenu.PlacementTarget = BurgerButton;
+                contextmenu.Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom;
+               
+                contextmenu.HorizontalOffset = 0;
+                contextmenu.VerticalOffset = 0;
+                contextmenu.Height = 150;
+                contextmenu.Width = 250;
+                contextmenu.IsOpen = true;
+                
             }
         }
         private void Burger_MouseRightButtonUp(object sender, RoutedEventArgs e)

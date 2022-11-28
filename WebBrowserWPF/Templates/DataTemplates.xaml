@@ -15,5 +15,10 @@
 
         </Grid>
     </DataTemplate>
-    
+
+    <ControlTemplate x:Key="ItemTemplate" TargetType="{x:Type MenuItem}">
+        <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+            <ContentPresenter ContentSource="Header"/>
+        </Border>
+    </ControlTemplate>
 </ResourceDictionary>
